@@ -1,4 +1,4 @@
-# Antigravity CLI — Termux Installation Guide
+# 🚀 Antigravity CLI — Termux Installation Guide
 
 > **Antigravity CLI (`agy`)** is Google's AI-first development platform. This repo provides a one-shot install script for **Android (Termux, aarch64)**.
 
@@ -17,7 +17,7 @@
 
 ### Download Termux
 
-<a href="https://f-droid.org/packages/com.termux/">
+<a href="https://f-droid.org/packages/com.termux/" target="_blank" rel="noopener noreferrer">
   <img src="https://img.shields.io/badge/Download%20Termux-F--Droid-brightgreen?style=for-the-badge&logo=fdroid&logoColor=white" alt="Download Termux on F-Droid">
 </a>
 
