@@ -1,4 +1,4 @@
-# 🚀 Antigravity CLI — Termux Installation Guide
+# Antigravity CLI — Termux Installation Guide
 
 > **Antigravity CLI (`agy`)** is Google's AI-first development platform. This repo provides a one-shot install script for **Android (Termux, aarch64)**.
 
@@ -9,11 +9,23 @@
 | Requirement | Details |
 |---|---|
 | **Device** | Android phone/tablet (64-bit ARM — `aarch64`) |
-| **App** | [Termux](https://f-droid.org/packages/com.termux/) from F-Droid *(not Play Store)* |
+| **App** | Termux from F-Droid *(not Play Store)* |
 | **Storage** | ~500 MB free |
 | **Internet** | Active connection required |
 
 > ⚠️ **Important:** Use the **F-Droid** version of Termux, not the Google Play Store version. The Play Store version has outdated binaries.
+
+### Download Termux
+
+<a href="https://f-droid.org/packages/com.termux/">
+  <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="75">
+</a>
+
+&nbsp;&nbsp;or&nbsp;&nbsp;
+
+<a href="https://github.com/termux/termux-app/releases/latest">
+  <img src="https://img.shields.io/github/v/release/termux/termux-app?color=black&label=Download%20Termux%20APK&logo=github&style=for-the-badge" alt="Download Termux APK from GitHub">
+</a>
 
 ---
 
@@ -49,15 +61,16 @@ bash install-antigravity.sh
 
 ## 🔍 What the Script Does
 
-The script runs **5 automated steps**:
+The script runs **6 automated steps**:
 
 | Step | Action |
 |------|--------|
-| `1/5` | Updates Termux packages (`apt update && apt full-upgrade`) |
-| `2/5` | Installs prerequisites: `curl`, `tar`, `ca-certificates`, `resolv-conf`, `glibc-repo` |
-| `3/5` | Installs `glibc` (required to run Linux binaries on Termux) |
-| `4/5` | Downloads and runs the official Antigravity CLI installer |
-| `5/5` | Verifies that `agy` binary and glibc loader are correctly installed |
+| `1/6` | Requests Android storage permission via `termux-setup-storage` |
+| `2/6` | Updates Termux packages (`apt update && apt full-upgrade`) |
+| `3/6` | Installs prerequisites: `curl`, `tar`, `ca-certificates`, `resolv-conf`, `glibc-repo` |
+| `4/6` | Installs `glibc` (required to run Linux binaries on Termux) |
+| `5/6` | Downloads and runs the official Antigravity CLI installer *(skipped if already up-to-date)* |
+| `6/6` | Verifies that `agy` binary and glibc loader are correctly installed |
 
 ---
 
@@ -69,21 +82,15 @@ After installation completes, verify it works:
 agy --version
 ```
 
-You should see the installed version of the Antigravity CLI printed.
-
 ---
 
-## 🚀 Getting Started with `agy`
+## 🚀 Basic Commands
 
 ```bash
-# Launch the Antigravity CLI interactive session
-agy
-
-# Start a new chat
-agy chat
-
-# Get help
-agy --help
+agy               # Start interactive session
+agy chat          # Start a new chat
+agy --help        # Show all commands
+agy --version     # Show installed version
 ```
 
 ---
