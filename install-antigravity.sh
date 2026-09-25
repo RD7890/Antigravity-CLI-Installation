@@ -8,21 +8,29 @@ echo "=== Native Termux Antigravity CLI Setup ==="
     exit 1
 }
 
-echo "[1/5] Updating Termux..."
+echo "[1/6] Requesting storage permission..."
+if command -v termux-setup-storage >/dev/null 2>&1; then
+    termux-setup-storage
+    sleep 3
+else
+    echo "[WARN] termux-setup-storage not found — skipping (install Termux:API if needed)."
+fi
+
+echo "[2/6] Updating Termux..."
 apt update
 apt full-upgrade -y
 
-echo "[2/5] Installing prerequisites..."
+echo "[3/6] Installing prerequisites..."
 apt install -y curl tar ca-certificates resolv-conf glibc-repo
 
-echo "[3/5] Installing glibc..."
+echo "[4/6] Installing glibc..."
 apt update
 apt install -y glibc
 
-echo "[4/5] Installing Antigravity CLI..."
+echo "[5/6] Installing Antigravity CLI..."
 curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh | bash
 
-echo "[5/5] Verifying..."
+echo "[6/6] Verifying..."
 hash -r
 
 command -v agy >/dev/null 2>&1 || {
