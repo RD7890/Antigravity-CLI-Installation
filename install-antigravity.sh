@@ -71,7 +71,7 @@ else
     [ -n "$_LATEST_VER" ] && [ -n "$_INSTALLED_VER" ] && \
         printf "    ${YLW}↑${R}  ${DIM}Update: v${_INSTALLED_VER} → v${_LATEST_VER}${R}\n"
     run_quiet "Fetching and running official installer" \
-        bash -c 'curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh | bash'
+        bash -c 'AGY_INSTALL_SKIP_LAUNCH=1 bash <(curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh)'
 fi
 step "6/6" "Verifying"
 hash -r
