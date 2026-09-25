@@ -49,7 +49,7 @@ err() {
 
 # ─────────────────────────────────────────────────────────────────────────────
 step "1/6" "Requesting Storage Permission"
-printf "    ${YLW}⚠${R}  ${DIM}Allow storage access in the dialog...${R}\n"
+printf "    ${YLW}[!]${R}  ${DIM}Allow storage access in the dialog...${R}\n"
 termux-setup-storage
 sleep 3
 step "2/6" "Updating Termux"
@@ -78,7 +78,7 @@ hash -r
 run_quiet "Checking agy binary"   bash -c 'command -v agy'
 run_quiet "Checking glibc loader" test -x "$PREFIX/glibc/lib/ld-linux-aarch64.so.1"
 printf "  ${DIM}${WHT}⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯${R}\n"
-printf "  ${B}${GRN}⚡  Ready!${R}  ${DIM}Version:${R} ${GRN}${_INSTALLED_VER:-$(agy --version 2>/dev/null || echo 'latest')}${R}\n"
+printf "  ${B}${GRN}[**] Ready!${R}  ${DIM}Version:${R} ${GRN}${_INSTALLED_VER:-$(agy --version 2>/dev/null || echo 'latest')}${R}\n"
 printf "\n"
 printf "  ${B}${WHT}Basic Commands${R}\n"
 printf "  ${GRN}›${R}  ${B}agy${R}               ${DIM}Start interactive session${R}\n"
