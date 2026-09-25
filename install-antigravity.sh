@@ -9,12 +9,8 @@ echo "=== Native Termux Antigravity CLI Setup ==="
 }
 
 echo "[1/6] Requesting storage permission..."
-if command -v termux-setup-storage >/dev/null 2>&1; then
-    termux-setup-storage
-    sleep 3
-else
-    echo "[WARN] termux-setup-storage not found — skipping (install Termux:API if needed)."
-fi
+termux-setup-storage
+sleep 3
 
 echo "[2/6] Updating Termux..."
 apt update
