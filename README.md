@@ -18,13 +18,7 @@
 ### Download Termux
 
 <a href="https://f-droid.org/packages/com.termux/">
-  <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="75">
-</a>
-
-&nbsp;&nbsp;or&nbsp;&nbsp;
-
-<a href="https://github.com/termux/termux-app/releases/latest">
-  <img src="https://img.shields.io/github/v/release/termux/termux-app?color=black&label=Download%20Termux%20APK&logo=github&style=for-the-badge" alt="Download Termux APK from GitHub">
+  <img src="https://img.shields.io/badge/Download%20Termux-F--Droid-brightgreen?style=for-the-badge&logo=fdroid&logoColor=white" alt="Download Termux on F-Droid">
 </a>
 
 ---
