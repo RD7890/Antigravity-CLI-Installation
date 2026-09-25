@@ -62,9 +62,9 @@ step "4/6" "Installing glibc"
 run_quiet "Refreshing package lists" apt-get update -y
 run_quiet "Installing glibc"         apt-get install -y glibc
 step "5/6" "Installing Antigravity CLI"
-_INSTALLED_VER="$(agy --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+_INSTALLED_VER="$(agy --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true)"
 _LATEST_VER="$(curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh 2>/dev/null \
-    | grep -oE 'VERSION=[^ ]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+    | grep -oE 'VERSION=[^ ]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true)"
 if command -v agy >/dev/null 2>&1 && { [ -z "$_LATEST_VER" ] || [ "$_INSTALLED_VER" = "$_LATEST_VER" ]; }; then
     printf "    ${GRN}✓${R}  ${WHT}Already installed${R}  ${DIM}(${_INSTALLED_VER:-latest})${R}\n"
 else
