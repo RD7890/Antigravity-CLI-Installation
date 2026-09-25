@@ -62,8 +62,21 @@ step "4/6" "Installing glibc"
 run_quiet "Refreshing package lists" apt-get update -y
 run_quiet "Installing glibc"         apt-get install -y glibc
 step "5/6" "Installing Antigravity CLI"
-run_quiet "Fetching and running official installer" \
-    bash -c 'curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh | bash'
+_INSTALLED_VER=""
+_LATEST_VER=""
+if command -v agy >/dev/null 2>&1; then
+    _INSTALLED_VER="$(agy --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+fi
+_LATEST_VER="$(curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh 2>/dev/null \
+    | grep -oE 'VERSION=["\x27]?[0-9]+\.[0-9]+\.[0-9]+' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+if [ -n "$_INSTALLED_VER" ] && { [ -z "$_LATEST_VER" ] || [ "$_INSTALLED_VER" = "$_LATEST_VER" ]; }; then
+    printf "    ${GRN}✓${R}  ${WHT}Already up-to-date${R}  ${DIM}(v${_INSTALLED_VER})${R}\n"
+else
+    [ -n "$_LATEST_VER" ] && [ -n "$_INSTALLED_VER" ] && \
+        printf "    ${YLW}↑${R}  ${DIM}Update: v${_INSTALLED_VER} → v${_LATEST_VER}${R}\n"
+    run_quiet "Fetching and running official installer" \
+        bash -c 'curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh | bash'
+fi
 step "6/6" "Verifying"
 hash -r
 run_quiet "Checking agy binary"   bash -c 'command -v agy'
