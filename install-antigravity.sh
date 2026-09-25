@@ -8,10 +8,8 @@ BLU="\033[94m"; CYN="\033[96m"; WHT="\033[97m"
 
 # ── Banner ────────────────────────────────────────────────────────────────────
 clear
-printf "\n"
 printf "  ${B}${GRN}Antigravity CLI${R}  ${DIM}—  Termux Installer  ·  aarch64${R}\n"
 printf "  ${DIM}${WHT}⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯${R}\n"
-printf "\n"
 
 # ── Spinner ───────────────────────────────────────────────────────────────────
 FRAMES=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
@@ -37,8 +35,7 @@ run_quiet() {
 
 # ── Step header ───────────────────────────────────────────────────────────────
 step() {
-    printf "\n  ${B}${GRN}◈ Step %s${R}  ${B}${WHT}%s${R}\n" "$1" "$2"
-    printf "  ${DIM}  ─────────────────────────────────${R}\n"
+    printf "  ${B}${GRN}◈ %s${R}  ${WHT}%s${R}\n" "$1" "$2"
 }
 
 # ── Error ─────────────────────────────────────────────────────────────────────
@@ -51,37 +48,25 @@ err() {
 [ "$(uname -m)" = "aarch64" ] || err "This device is not aarch64."
 
 # ─────────────────────────────────────────────────────────────────────────────
-step "1 / 6" "Requesting Storage Permission"
-printf "    ${YLW}⚠${R}  ${DIM}Allow storage access in the dialog that appears...${R}\n"
+step "1/6" "Requesting Storage Permission"
+printf "    ${YLW}⚠${R}  ${DIM}Allow storage access in the dialog...${R}\n"
 termux-setup-storage
 sleep 3
-
-step "2 / 6" "Updating Termux"
+step "2/6" "Updating Termux"
 run_quiet "Updating package lists"  apt-get update -y
 run_quiet "Upgrading packages"      apt-get full-upgrade -y
-
-step "3 / 6" "Installing Prerequisites"
+step "3/6" "Installing Prerequisites"
 run_quiet "curl · tar · ca-certificates · glibc-repo" \
     apt-get install -y curl tar ca-certificates resolv-conf glibc-repo
-
-step "4 / 6" "Installing glibc"
+step "4/6" "Installing glibc"
 run_quiet "Refreshing package lists" apt-get update -y
 run_quiet "Installing glibc"         apt-get install -y glibc
-
-step "5 / 6" "Installing Antigravity CLI"
+step "5/6" "Installing Antigravity CLI"
 run_quiet "Fetching and running official installer" \
     bash -c 'curl -fsSL https://raw.githubusercontent.com/wallentx/antigravity-cli-termux/dev/install.sh | bash'
-
-step "6 / 6" "Verifying Installation"
+step "6/6" "Verifying"
 hash -r
-run_quiet "Checking agy binary"       bash -c 'command -v agy'
-run_quiet "Checking glibc loader"     test -x "$PREFIX/glibc/lib/ld-linux-aarch64.so.1"
-
-# ── Success ───────────────────────────────────────────────────────────────────
-printf "\n"
+run_quiet "Checking agy binary"   bash -c 'command -v agy'
+run_quiet "Checking glibc loader" test -x "$PREFIX/glibc/lib/ld-linux-aarch64.so.1"
 printf "  ${DIM}${WHT}⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯${R}\n"
-printf "  ${B}${GRN}⚡  Installed successfully!${R}\n"
-printf "  ${DIM}Version :${R}  ${GRN}$(agy --version 2>/dev/null || echo 'unknown')${R}\n"
-printf "  ${DIM}Run     :${R}  ${B}${WHT}agy${R}\n"
-printf "  ${DIM}${WHT}⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯${R}\n"
-printf "\n"
+printf "  ${B}${GRN}⚡  Installed!${R}  ${DIM}Run:${R}  ${B}${WHT}agy${R}  ${DIM}|  $(agy --version 2>/dev/null || echo '')${R}\n"
